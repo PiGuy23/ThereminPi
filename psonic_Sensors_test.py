@@ -1,3 +1,5 @@
+#Dosent Work
+
 from gpiozero import DistanceSensor
 from time import sleep
 from psonic import *
@@ -12,9 +14,7 @@ while True:
     if(sensor.distance != 1.0) :
         nval = (sensor.distance)
         
-        #pitch = round(sensor.distance * 100 + 30)
-        #if (pitch <= 80) :
-            #sender.send_message('/play_this', pitch)
+        
         while (((nval - val) > 0.1) or ((val - nval) > 0.1)):
             if ((nval - val) > 0.1) :
                 nval = nval - 0.1
