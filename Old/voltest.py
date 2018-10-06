@@ -5,7 +5,7 @@ from time import sleep
 sensor3 = DistanceSensor(echo=22, trigger=11)
 m = alsaaudio.Mixer('PCM')
 
-#itsokay
+#itsokay test
 
 val= .5
 nval = .5
