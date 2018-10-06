@@ -1,4 +1,4 @@
-#Dosent Work
+#Kind of Works Now
 
 from gpiozero import DistanceSensor
 from time import sleep
@@ -8,35 +8,28 @@ from psonic import *
 sensor = DistanceSensor(echo=17, trigger=4)
 
 
-val = .1
-nval = .1
+pitch = 60
 while True:
     if(sensor.distance != 1.0) :
-        nval = (sensor.distance)
+        val = (sensor.distance)
         
         
-        while (((nval - val) > 0.1) or ((val - nval) > 0.1)):
-            if ((nval - val) > 0.1) :
-                nval = nval - 0.1
-                
-            if ((val - nval) > .1) :
-                nval = nval + 0.1
                 
         
-        pitch = round(val * 100 + 30)
+        pitch2 = round(val * 100 + 30)
+        while ((pitch - pitch2) > 1) or ((pitch2 - pitch) > 1): 
+            if ((pitch - pitch2) > 1):
+                pitch2 += 1
+            if ((pitch2 - pitch) > 1):
+                pitch2 -= 1
+        pitch = pitch2
         if (pitch <= 80) :
-            play(pitch)
-            print(pitch)
-            val = nval
-        sleep(1)
+            play(pitch, release=0.5)
+        sleep(0.05)
         
         
-    else :
-        
-        pitch = round(val * 100 + 30)
-        play(pitch)
-        print(pitch)
-        sleep(1)
+    
+    
         
         
     
