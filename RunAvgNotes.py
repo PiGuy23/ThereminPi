@@ -34,5 +34,5 @@ while True:
     if (pitch <= 80) :
             play(pitch, release=0.5)
         
-            
+    print(pitch) 
     sleep(0.08)
