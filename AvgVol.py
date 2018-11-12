@@ -2,7 +2,7 @@ import alsaaudio
 from gpiozero import DistanceSensor
 from time import sleep
 
-sensor1 = DistanceSensor(echo=17, trigger=4)
+sensor1 = DistanceSensor(echo=24, trigger=25)
 sensor2 = DistanceSensor(echo=22, trigger=11)
 m = alsaaudio.Mixer('PCM')
 

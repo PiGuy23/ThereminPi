@@ -5,7 +5,7 @@ from time import sleep
 from psonic import *
 
 
-sensor = DistanceSensor(echo=17, trigger=4)
+sensor = DistanceSensor(echo=24, trigger=25)
 
 
 pitch = 60
