@@ -1,10 +1,9 @@
 #WorksPrettyWell
-import alsaaudio
 from gpiozero import DistanceSensor
 from time import sleep
+from psonic import *
 
-sensor = DistanceSensor(echo=22, trigger=11)
-m = alsaaudio.Mixer('PCM')
+sensor = DistanceSensor(echo=24, trigger=25)
 
 
 vals = [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
@@ -31,12 +30,9 @@ while True:
         
     avg = j/4
     
-    vol = round(((avg) * 100) + 30)
-    if (vol > 100) :
-        vol = 100
-    print(vol)
-    m.setvolume(vol)
+    pitch = round(avg * 100 + 30)
+    if (pitch <= 80) :
+            play(pitch, release=0.5)
         
+            
     sleep(0.08)
-
-
