@@ -4,23 +4,33 @@ from time import sleep
 
 
 vals = [1] * 13
+vals2 = [3] * 4
 
 d = 1
+d2 = 4
 
 def f_avg (arr):
     k = len(arr) -1
     i = 0
     while i < k:
-        vals[i] = vals[i+1]
+        arr[i] = arr[i+1]
         i = i+1
     
-    
+    global d
+    global d2
     x = int(input())
-    if x == 1.0:
-        vals[k] = d
+    if (k == 12) :
+        if x == 1.0: 
+            arr[k] = d
+        else:
+            arr[k] = x 
+            d = x
     else:
-        vals[k] = x
-        d = x
+        if x == 1.0: 
+            arr[k] = d2
+        else:
+            arr[k] = x 
+            d2 = x
     
     j = 0
     for y in arr:
@@ -30,4 +40,5 @@ def f_avg (arr):
     return avg
 
 while True:
-    print(f_avg(vals))
+    print(f_avg(vals2))
+    
