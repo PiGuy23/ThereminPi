@@ -41,4 +41,5 @@ def f_avg (arr):
 
 while True:
     print(f_avg(vals2))
+    print(f_avg(vals))
     

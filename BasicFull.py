@@ -27,8 +27,8 @@ while True:
     pitch = pitch2
     if (pitch <= 80) :
          play(pitch, release=0.5)
-    print("Pitch: ")
-    print(pitch)
+    
+   
         
     
     #Volume
@@ -39,22 +39,20 @@ while True:
                 nval2 = nval2 - 0.1 
             if ((val2 - nval2) > .1) :
                 nval2 = nval2 + 0.1
-        vol = round(((val2) * 100) + 50)
+        vol = round(((val2) * 100) + 60)
         if (vol > 100) :
             vol = 100
         m.setvolume(vol)
         val2 = nval2
-        print("Vol: ")
-        print(vol)
+        
     else :
         vol = round(((val2) * 100) + 50)
         if (vol > 100) :
             vol = 100
         m.setvolume(vol)
-        print("Vol: ")
-        print(vol)
+        
     #Universal Sleep
-    sleep(0.5)
+    sleep(0.1)
         
     
     

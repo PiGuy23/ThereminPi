@@ -31,8 +31,8 @@ while True:
     avg = j/4
     
     pitch = round(avg * 100 + 30)
-    if (pitch <= 80) :
-            play(pitch, release=0.5)
+    if (pitch <= 150) :
+            play(pitch, release=0.1)
         
     print(pitch) 
     sleep(0.08)
