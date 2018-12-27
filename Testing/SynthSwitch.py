@@ -10,20 +10,40 @@ GPIO.setwarnings(False) # Ignore warning for now
 GPIO.setup(21, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 sender = udp_client.SimpleUDPClient('127.0.0.1', 4559)
+if (GPIO.input(21) == GPIO.HIGH) :
+    code = """
+    use_synth :saw
+    s = play 60, release: 20, note_slide: 0.1
 
-code = """use_synth :saw
-s = play 60, release: 20, note_slide: 0.1
+    live_loop :listen do
+    use_real_time
+  
+    msg = sync "/osc/play_this"
+  
+    control s, note: msg, amp: 0.5
+  
+  
+  
+    end
+    """
+    print("Saw")
+else :
+    code = """
+    use_synth :prophet
+    s = play 60, release: 20, note_slide: 0.1
 
-live_loop :listen do
-use_real_time
+    live_loop :listen do
+    use_real_time
   
-msg = sync "/osc/play_this"
+    msg = sync "/osc/play_this"
   
-control s, note: msg, amp: 0.5
+    control s, note: msg, amp: 0.5
   
   
   
-end"""
+    end
+    """
+    print("Prophet")
 run(code)
 sensor = DistanceSensor(echo=24, trigger=25)
 
@@ -53,39 +73,7 @@ while True:
     avg = j/4
     
     pitch = round(avg * 100 + 30)
-    if (pitch <= 150) :
+    if (pitch <= 100) :
             sender.send_message('/play_this', pitch)
         
-    if (GPIO.input(21) == GPIO.HIGH):
-        code = """
-        use_synth :prophet
-        s = play 60, release: 20, note_slide: 0.1
-
-        live_loop :listen do
-        use_real_time
-  
-        msg = sync "/osc/play_this"
-  
-        control s, note: msg, amp: 0.5
-  
-  
-  
-        end"""
-        print("prophet")
-    else:
-        code = """
-        use_synth :saw
-        s = play 60, release: 20, note_slide: 0.1
-
-        live_loop :listen do
-        use_real_time
-  
-        msg = sync "/osc/play_this"
-  
-        control s, note: msg, amp: 0.5
-  
-  
-  
-        end"""
-        print("saw")
     sleep(0.08)
