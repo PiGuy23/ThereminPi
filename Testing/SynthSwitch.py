@@ -14,43 +14,50 @@ import RPi.GPIO as GPIO # Import Raspberry Pi GPIO library
 GPIO.setwarnings(False) # Ignore warning for now
 #GPIO.setmode(GPIO.BOARD) # Use physical pin numbering
 GPIO.setup(21, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(20, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 sender = udp_client.SimpleUDPClient('127.0.0.1', 4559)
-if GPIO.input(21) == GPIO.HIGH:
-    code = """
-    use_synth :saw
-    s = play 60, release: 30, note_slide: 0.1
 
-    live_loop :listen do
-    use_real_time
+code1 = """
+use_synth :saw
+s = play 60, release: 120, note_slide: 0.1
+
+live_loop :listen do
+use_real_time
   
-    msg = sync "/osc/play_this"
+msg = sync "/osc/play_this"
   
-    control s, note: msg, amp: 0.5
+control s, note: msg, amp: 0.5
   
   
   
-    end
-    """
+end
+"""
+code2 = """
+use_synth :prophet
+s = play 60, release: 1200, note_slide: 0.1
+
+live_loop :listen do
+use_real_time
+  
+msg = sync "/osc/play_this"
+  
+control s, note: msg, amp: 0.5
+  
+  
+  
+end
+"""
+runner = ""
+if GPIO.input(21) == GPIO.HIGH:
+    runner = code1
     print("Saw")
 else :
-    code = """
-    use_synth :prophet
-    s = play 60, release: 30, note_slide: 0.1
-
-    live_loop :listen do
-    use_real_time
-  
-    msg = sync "/osc/play_this"
-  
-    control s, note: msg, amp: 0.5
-  
-  
-  
-    end
-    """
+    runner = code2
     print("Prophet")
-run(code)
+run(runner)
+
+
 sensor = DistanceSensor(echo=24, trigger=25)
 
 
@@ -59,6 +66,16 @@ vals = [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 d = 0.5
 sender.send_message('/play_this', 60)
 while True:
+    if GPIO.input(20) == GPIO.HIGH :
+        stop()
+    if (GPIO.input(21) == GPIO.HIGH) and (runner == code2) :
+        runner = code1
+        stop()
+        run(runner)
+    elif (GPIO.input(21) == GPIO.LOW) and (runner == code1):
+        runner = code2
+        stop()
+        run(runner)
     i = 0
     while i < 8:
         vals[i] = vals[i+1]
