@@ -1,20 +1,22 @@
 #WorksPrettyWell
-
 from gpiozero import DistanceSensor
 from time import sleep
 from psonic import *
 
 from pythonosc import osc_message_builder
 from pythonosc import udp_client
+
+
+
  # Import Raspberry Pi GPIO library
 
 import RPi.GPIO as GPIO # Import Raspberry Pi GPIO library
 GPIO.setwarnings(False) # Ignore warning for now
 #GPIO.setmode(GPIO.BOARD) # Use physical pin numbering
-GPIO.setup(40, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(21, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 sender = udp_client.SimpleUDPClient('127.0.0.1', 4559)
-if GPIO.input(40) == GPIO.HIGH:
+if GPIO.input(21) == GPIO.HIGH:
     code = """
     use_synth :saw
     s = play 60, release: 30, note_slide: 0.1
