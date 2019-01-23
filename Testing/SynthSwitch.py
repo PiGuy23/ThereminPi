@@ -76,24 +76,25 @@ while True:
         runner = code2
         stop()
         run(runner)
+    k = len(vals) -1
     i = 0
-    while i < 8:
+    while i < k:
         vals[i] = vals[i+1]
         i = i+1
     
     
     x = (sensor.distance)
     if x == 1.0:
-        vals[8] = d
+        vals[k] = d
     else:
-        vals[8] = x
+        vals[k] = x
         d = x
     
     j = 0
     for y in vals:
         j = j + y
         
-    avg = j/4
+    avg = j/(k+1)
     
     pitch = round(avg * 100 + 30)
     if (pitch <= 100) :
