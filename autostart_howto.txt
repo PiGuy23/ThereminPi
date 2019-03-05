@@ -5,4 +5,4 @@ in .config/lxsession/LXDE-pi/autostart.txt
 
 add the line
 
-@bash /home/pi/Desktop/Theremin/opensonic.sh
+@bash /home/pi/Desktop/Theremin/opener.sh
