@@ -9,7 +9,7 @@ from setup2 import *
 time_interval = .1
 
 #Access array length
-vol_arr_length = 5
+vol_arr_length = 10
 notes_arr_length = 8
 
 if GPIO.input(20) == GPIO.HIGH:
@@ -89,7 +89,7 @@ while True:
     #Volume
     v_avg = average(vals2, x2, d2)
     
-    vol = round(((v_avg) * 100) + 60)
+    vol = round(((v_avg) * 100) + 40)
     if (vol > 100) :
         vol = 100
     vol_access.setvolume(vol)

@@ -16,4 +16,4 @@ while True: # Run forever
     else :
         test = "No"
     print(test)
-    sleep(1)
+    sleep(.1)

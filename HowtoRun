@@ -1,8 +1,0 @@
-From Desktop/Theremin
-
-sudo -H -u pi /usr/bin/python3 FullRun1.py &
-
-To Stop:
-
-ps -a
-kill ____
